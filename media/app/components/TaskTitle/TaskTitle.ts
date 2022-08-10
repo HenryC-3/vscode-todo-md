@@ -2,6 +2,12 @@ import { marked } from 'marked';
 import { mapStores } from 'pinia';
 import { defineComponent, h, VNodeArrayChildren } from 'vue';
 import { useStore } from '../../store';
+import { dendronLinkTokenizer } from '../Tokenizers/dendronLinkTokenizer';
+
+// @ts-ignore
+// TODO: type safe
+// TODO: 为什么必须在这里 (media/app/TaskTitle) 使用 tokenizer 才会生效，在 (src/extension.ts) 却不会， marked.use() 不是全局生效的吗？
+marked.use({ tokenizer: dendronLinkTokenizer });
 
 export default defineComponent({
 	name: 'TaskTitle',

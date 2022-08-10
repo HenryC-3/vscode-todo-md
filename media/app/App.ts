@@ -25,7 +25,9 @@ marked.Renderer.prototype.link = (href, title = '', text) => {
 		// let webview handle command Uri links
 		return `<a href="${href}" title="${href}" class="${classes}">${text}</a>`;
 	} else {
-		return `<a data-href="${href}" href="javascript:void(0);" title="${href}" class="${classes}">${text}</a>`;
+		// FIXME: dendronTokenizer 处理的 dendron link 此处 text 总为空，不知是原因
+		// 此处使用 ${text ? text : title} 当 text 为空时，填入 title
+		return `<a data-href="${href}" href="javascript:void(0);" title="${href}" class="${classes}">${text ? text : title}</a>`;
 	}
 };
 
